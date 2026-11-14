@@ -1,11 +1,10 @@
 *{box-sizing:border-box}
 :root{--ink:#172b3a;--muted:#71808c;--line:#e5ebef;--paper:#f7f9fa;--blue:#244e68;--blue2:#dce8ee;--accent:#b57b4a;--white:#fff}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
-/* 字体全局放大至 18px，行高 1.9 */
 body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans","Noto Sans SC",sans-serif;font-size:18px;line-height:1.9}
 .shell{max-width:1440px;margin:auto;background:#fff;min-height:100vh}
 
-/* 重点词加粗与高亮特效 */
+/* 重点词高亮 */
 b { color: var(--blue); font-weight: 700; background: linear-gradient(transparent 60%, rgba(36,78,104,0.15) 40%); }
 
 /* 顶栏 */
@@ -138,14 +137,18 @@ input[type=search]:focus{border-color:var(--blue)}
 .skill-card h3{font-size:18px;margin:0 0 14px;color:var(--blue)}
 .skill-card p{font-size:15.5px;color:#5e6d78;margin:0;line-height:1.9}
 
-/* 页脚 */
-footer{padding:40px 10%;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#829099;font-size:13px}
-.footer-brand{font-size:13px;letter-spacing:.14em;color:var(--blue);font-weight:700}
-.footer-brand span{display:block;font-size:10px;color:#a0aaaf;font-weight:400;margin-top:4px}
-footer a{color:var(--accent);text-decoration:none;font-size:12px;letter-spacing:.08em;transition:opacity 0.3s}
-footer a:hover{opacity:0.7}
+/* 后台/画廊 */
+.vault-section{background:#fbfcfc}
+.vault-controls{display:flex;gap:10px;align-items:center;margin:22px 0;flex-wrap:wrap}
+.upload-btn{background:var(--blue);color:#fff;padding:12px 18px;font-size:13px;cursor:pointer;display:inline-flex;gap:9px;align-items:center;border-radius:4px;}
+.media-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.media-item{border:1px solid var(--line);padding:9px;min-width:0;background:#fff;border-radius:4px;}
+.media-item img,.media-item video{width:100%;height:130px;object-fit:cover;background:#edf1f3;border-radius:2px;}
+.media-item .file-preview{height:130px;display:grid;place-items:center;background:#edf1f3;color:#68808e;font-size:30px}
+.media-item p{font-size:12px;overflow-wrap:anywhere;margin:8px 0}
+.empty-state{color:#99a4aa;font-size:13.5px;padding:24px 0}
 
-/* 详情页 (保持原有放大版) */
+/* 详情页 */
 .detail-hero{padding:80px 10% 60px;border-bottom:1px solid var(--line);background:linear-gradient(115deg,#f5f8fa,#fff)}
 .detail-hero h1{font-size:clamp(34px,4.5vw,52px);line-height:1.25;letter-spacing:-.03em;margin:16px 0 10px}
 .detail-sub{color:var(--accent);font-size:16px;margin:0 0 20px;font-weight:600}
@@ -169,6 +172,13 @@ footer a:hover{opacity:0.7}
 .doc-list{display:flex;flex-wrap:wrap;gap:14px}
 .doc-link{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:14px 22px;font-size:16px;color:var(--blue);text-decoration:none;border-radius:6px;transition:all 0.3s}
 .doc-link:hover{border-color:var(--blue);background:#f6f9fb;transform:translateY(-2px)}
+
+/* 页脚 */
+footer{padding:40px 10%;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#829099;font-size:13px}
+.footer-brand{font-size:13px;letter-spacing:.14em;color:var(--blue);font-weight:700}
+.footer-brand span{display:block;font-size:10px;color:#a0aaaf;font-weight:400;margin-top:4px}
+footer a{color:var(--accent);text-decoration:none;font-size:12px;letter-spacing:.08em;transition:opacity 0.3s}
+footer a:hover{opacity:0.7}
 
 @media(max-width:900px){
   .topbar{padding:0 5%}nav{gap:13px}

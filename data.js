@@ -40,8 +40,14 @@ window.SITE_DATA = {
       subtitle:"阿里云天池数据分析项目｜负责人", enSubtitle:"Alibaba Cloud Tianchi Data Analytics Project | Team Lead",
       intro:"基于阿里云天池二手车交易数据集（训练集 <b>15 万条</b>，测试集 A/B 各 <b>5 万条</b>），针对受多维特征影响、传统线性模型难以刻画复杂关系的问题，构建价格预测模型。",
       enIntro:"Developed used-car price prediction models using the Alibaba Cloud Tianchi dataset (<b>150,000</b> training records and <b>50,000</b> test records), addressing complex relationships that traditional linear models struggle to capture.",
-      cover:"assets/projects/project-usedcar-cover.jpg", video:"assets/projects/project-usedcar-result.jpg, 
-      gallery:[], docs:[],
+      
+      cover:"assets/projects/project-usedcar-cover.jpg", 
+      video:"", 
+      gallery:[
+        {type:"image", src:"assets/projects/project-usedcar-result.jpg", zh:"模型预测结果与特征分布", en:"Model Prediction Results & Feature Distribution"}
+      ], 
+      docs:[],
+      
       outcomes:[
         ["0.9687","0.9687","XGBoost 模型 R²","XGBoost model R²"],
         ["566.01 元","RMB 566.01","XGBoost MAE（调参后）","XGBoost MAE (tuned)"],
@@ -65,7 +71,14 @@ window.SITE_DATA = {
       subtitle:"算法实现", enSubtitle:"Algorithm Implementation",
       intro:"基于 MovieLens 数据集（约 <b>2,000 万条</b>评分记录、<b>2.7 万部</b>电影），针对用户兴趣差异明显的问题，开展用户行为分析与个性化推荐策略研究。",
       enIntro:"Analyzed user behavior and personalized strategies using the MovieLens dataset (approx. <b>20 million</b> ratings, <b>27,000</b> films) to address distinct user interest variations.",
-      cover:"assets/projects/project-movies-cover.jpg", video:"assets/projects/project-movies-result.jpg",
+      
+      cover:"assets/projects/project-movies-cover.jpg", 
+      video:"", 
+      gallery:[
+        {type:"image", src:"assets/projects/project-movies-result.jpg", zh:"Top-5 个性化推荐结果输出", en:"Top-5 Personalized Recommendations"}
+      ], 
+      docs:[],
+      
       outcomes:[
         ["2,000 万条","20M","评分记录","Ratings"],
         ["2.7 万部","27,000","电影数量","Films"],
@@ -88,7 +101,13 @@ window.SITE_DATA = {
       subtitle:"Java 全栈开发项目｜项目负责人", enSubtitle:"Java Full-stack Development Project | Team Lead",
       intro:"针对即时电商交易中用户、商家及骑手之间业务衔接复杂的问题，负责项目整体业务流程梳理与系统架构设计，明确不同角色业务需求及系统功能。",
       enIntro:"Mapped complex workflows among customers, merchants and couriers, taking charge of overall business process mapping and system architecture design for an instant-commerce platform.",
-      cover:"assets/projects/project-ecommerce-cover.jpg", video:"assets/projects/project-ecommerce-video.mp4",
+      
+      cover:"assets/projects/project-ecommerce-cover.jpg", 
+      video:"assets/projects/project-ecommerce-video.mp4", 
+      videoCover:"assets/projects/project-ecommerce-cover.jpg", 
+      gallery:[], 
+      docs:[],
+      
       outcomes:[
         ["4 大模块","4 modules","履约 / 评价 / 仲裁 / 结算","Fulfillment / Reviews / Arbitration / Settlement"],
         ["完整交付","Complete delivery","PRD + 系统设计图 + 演示视频","PRD + Diagrams + Demo video"]
@@ -107,7 +126,6 @@ window.SITE_DATA = {
     }
   ],
 
-  // 证书与奖项数据，补充了第六届人工智能竞赛一等奖
   credentials:[
     ["计算机二级（MS）","Computer Level 2 (MS)","专业技能证书","CERTIFICATE","assets/credentials/cert-cet2.jpg"],
     ["普通话二级甲等","Putonghua Proficiency Test — Level 2-A","语言能力","LANGUAGE","assets/credentials/cert-putonghua.jpg"],
@@ -132,7 +150,6 @@ window.SITE_DATA = {
   ]
 };
 
-// 多语言字典，已根据 txt 文案进行微调
 window.I18N = {
 zh:{
   navAbout:"关于",navExperience:"经历",navProjects:"项目",navCredentials:"证书与荣誉",navSkills:"技能",

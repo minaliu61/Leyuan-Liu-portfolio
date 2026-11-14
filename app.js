@@ -1,31 +1,200 @@
-const D=window.SITE_DATA;let lang="zh",activeFilter="All",mediaDb;
-const $=s=>document.querySelector(s);
-const tr=(key)=>I18N[lang][key]||key;
-const I18N={
-zh:{navAbout:"关于",navExperience:"经历",navProjects:"项目",navCredentials:"证书与荣誉",navSkills:"技能",navVault:"数字资产库",heroEyebrow:"个人作品集 · 数字档案",heroHello:"你好，我是",heroLead:"数据科学与大数据技术本科生，关注数据分析、数据建模与业务流程优化。",viewProjects:"查看项目",moreAbout:"了解更多",profileCard:"个人档案",studentRole:"数据科学与大数据技术 · 本科生",locationLabel:"学校",schoolShort:"广东金融学院",gradLabel:"预计毕业",emailLabel:"邮箱",metric1:"ETA 报表制作时间缩短",metric2:"每周运价查询处理量",metric3:"XGBoost 项目 R²",metric4:"数据与开发项目",aboutTitle:"关于我",aboutIntro:"将数据能力与业务理解结合，关注可落地的问题解决方案。",educationTitle:"教育背景",university:"广东金融学院",major:"数据科学与大数据技术 · 本科",courses:"主修课程：数据分析、数据建模、数据可视化、Python 程序设计项目课程、Java 程序设计项目课程等。",contactTitle:"联系信息",privacyNote:"公开部署前，建议确认是否展示手机号。可在 data.js 中关闭。",copyEmail:"复制邮箱 ↗",experienceTitle:"实习与实践经历",experienceIntro:"流程优化、数据运营与现场服务。",projectsTitle:"项目经历",projectsIntro:"从数据探索、模型评估到业务系统设计。",searchPlaceholder:"搜索项目、技术栈或关键词…",credentialsTitle:"证书与荣誉",credentialsIntro:"可继续上传证书扫描件、照片或相关证明。",skillsTitle:"专业技能",skillsIntro:"围绕数据处理、业务分析与应用开发形成的实践能力。",vaultTitle:"个人数字资产库",vaultIntro:"添加证书、项目演示、照片与视频；文件保存在当前浏览器中。",vaultNoticeTitle:"存储说明",vaultNotice:"此版本为静态 GitHub Pages 网站。上传到此处的文件保存在当前浏览器 IndexedDB，不会自动同步到 GitHub 或其他设备。若要公开展示，请将精选媒体放入仓库 assets 文件夹后再部署。",addMedia:"添加照片 / 视频 / 文件",exportData:"导出档案 JSON",importData:"导入档案 JSON",emptyMedia:"还没有上传媒体文件。",footerText:"持续更新 · 保持好奇 · 用数据解决问题",all:"全部",data:"数据分析",software:"软件开发",copyDone:"邮箱已复制",delete:"删除"},
-en:{navAbout:"About",navExperience:"Experience",navProjects:"Projects",navCredentials:"Credentials",navSkills:"Skills",navVault:"Digital Vault",heroEyebrow:"PORTFOLIO · DIGITAL ARCHIVE",heroHello:"Hello, I'm",heroLead:"An undergraduate in Data Science and Big Data Technology, interested in data analytics, modeling and business process optimization.",viewProjects:"Explore Projects",moreAbout:"About Me",profileCard:"PROFILE",studentRole:"Data Science & Big Data Technology · Undergraduate",locationLabel:"UNIVERSITY",schoolShort:"Guangdong University of Finance",gradLabel:"GRADUATION",emailLabel:"EMAIL",metric1:"Less manual ETA reporting time",metric2:"Weekly freight queries processed",metric3:"XGBoost project R²",metric4:"Data & software projects",aboutTitle:"About Me",aboutIntro:"Combining data capabilities with business understanding to solve practical problems.",educationTitle:"Education",university:"Guangdong University of Finance",major:"BSc in Data Science and Big Data Technology",courses:"Relevant coursework: Data Analytics, Data Modeling, Data Visualization, Python Programming Project, Java Programming Project, and more.",contactTitle:"Contact",privacyNote:"Before publishing, decide whether to display your phone number. You can disable it in data.js.",copyEmail:"Copy email ↗",experienceTitle:"Experience",experienceIntro:"Process optimization, data operations and on-site support.",projectsTitle:"Selected Projects",projectsIntro:"From exploratory analysis and model evaluation to business system design.",searchPlaceholder:"Search projects, technologies or keywords…",credentialsTitle:"Credentials & Awards",credentialsIntro:"Upload certificate scans, photos or supporting documents as needed.",skillsTitle:"Skills",skillsIntro:"Practical capabilities across data processing, business analysis and application development.",vaultTitle:"Personal Digital Asset Vault",vaultIntro:"Add certificates, project demos, photos and videos; files are stored in this browser.",vaultNoticeTitle:"Storage note",vaultNotice:"This is a static GitHub Pages site. Files uploaded here are stored in this browser's IndexedDB and are not synced to GitHub or other devices. To publish media, place selected files in the repository's assets folder and redeploy.",addMedia:"Add photos / videos / files",exportData:"Export archive JSON",importData:"Import archive JSON",emptyMedia:"No media uploaded yet.",footerText:"Keep learning · Stay curious · Solve problems with data",all:"All",data:"Data Science",software:"Software",copyDone:"Email copied",delete:"Delete"}
-};
-function applyLang(){document.documentElement.lang=lang==="zh"?"zh-CN":"en";document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;el.textContent=tr(k)});document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>el.placeholder=tr(el.dataset.i18nPlaceholder));$("#langToggle").textContent=lang==="zh"?"EN":"中文";renderAll()}
-function renderExperiences(){$("#experienceList").innerHTML=D.experiences.map(e=>`<article class="experience-card"><div><div class="exp-date">${e.date}</div><div class="exp-company">${lang==="zh"?e.company:e.companyEn}</div><div class="exp-role">${lang==="zh"?e.role:e.roleEn}</div></div><div class="exp-content"><h3>${lang==="zh"?e.title:e.titleEn}</h3><ul>${e.bullets.map(b=>`<li>${b[lang==="zh"?0:1]}</li>`).join("")}</ul></div></article>`).join("")}
-function renderProjects(){const q=$("#searchInput").value.toLowerCase();const arr=D.projects.filter(p=>(activeFilter==="All"||(activeFilter==="Data Science"?p.category==="Data Science":p.category==="Software"))&&JSON.stringify(p).toLowerCase().includes(q));$("#projectGrid").innerHTML=arr.map(p=>`<article class="project-card"><div class="project-top"><span>${p.category.toUpperCase()}</span><span>${p.date}</span></div><h3>${lang==="zh"?p.title:p.enTitle}</h3><div class="project-sub">${lang==="zh"?p.subtitle:p.enSubtitle}</div><p>${lang==="zh"?p.intro:p.enIntro}</p><ul>${p.bullets.map(b=>`<li>${b[lang==="zh"?0:1]}</li>`).join("")}</ul><div class="tech-list">${p.tech.map(t=>`<span>${t}</span>`).join("")}</div></article>`).join("")||`<div class="empty-state">No matching projects.</div>`}
-function renderCredentials(){$("#credentialGrid").innerHTML=D.credentials.map(c=>`<article class="credential"><div class="cred-type">${c[3]}</div><h3>${lang==="zh"?c[0]:c[1]}</h3><p>${lang==="zh"?c[2]:c[2]}</p></article>`).join("")}
-function renderSkills(){$("#skillGrid").innerHTML=D.skills.map(s=>`<article class="skill-card"><h3>${lang==="zh"?s[0]:s[1]}</h3><p>${lang==="zh"?s[2]:s[3]}</p></article>`).join("")}
-function renderFilters(){$("#filterButtons").innerHTML=[["All",tr("all")],["Data Science",tr("data")],["Software",tr("software")]].map(([v,l])=>`<button class="filter-btn ${activeFilter===v?"active":""}" data-filter="${v}">${l}</button>`).join("")}
-function renderAll(){renderExperiences();renderProjects();renderCredentials();renderSkills();renderFilters();$("#phoneText").textContent=D.showPhone?D.phone:(lang==="zh"?"未公开（可通过邮箱联系）":"Hidden — please contact by email")}
-$("#langToggle").addEventListener("click",()=>{lang=lang==="zh"?"en":"zh";applyLang()});
-$("#menuToggle").addEventListener("click",()=>$("#nav").classList.toggle("open"));
-$("#nav").addEventListener("click",e=>{if(e.target.tagName==="A")$("#nav").classList.remove("open")});
-$("#searchInput").addEventListener("input",renderProjects);
-$("#filterButtons").addEventListener("click",e=>{const b=e.target.closest("button[data-filter]");if(b){activeFilter=b.dataset.filter;renderFilters();renderProjects()}});
-$("#copyEmail").addEventListener("click",async()=>{await navigator.clipboard.writeText(D.profile.email);$("#copyEmail").textContent=tr("copyDone")});
-const req=indexedDB.open("LeyuanPersonalArchive",1);req.onupgradeneeded=()=>req.result.createObjectStore("media",{keyPath:"id",autoIncrement:true});req.onsuccess=()=>{mediaDb=req.result;renderMedia()};
-function storeMedia(file){return new Promise((resolve,reject)=>{const tx=mediaDb.transaction("media","readwrite");tx.objectStore("media").add({name:file.name,type:file.type,blob:file,added:new Date().toISOString()});tx.oncomplete=resolve;tx.onerror=reject})}
-function getMedia(){return new Promise(resolve=>{const tx=mediaDb.transaction("media","readonly");const r=tx.objectStore("media").getAll();r.onsuccess=()=>resolve(r.result||[])})}
-async function renderMedia(){if(!mediaDb)return;const items=await getMedia();$("#mediaGrid").innerHTML=items.length?items.map(m=>`<article class="media-item" data-id="${m.id}">${m.type.startsWith("image/")?`<img src="${URL.createObjectURL(m.blob)}" alt="">`:m.type.startsWith("video/")?`<video src="${URL.createObjectURL(m.blob)}" controls></video>`:`<div class="file-preview">PDF</div>`}<p>${escapeHtml(m.name)}</p><button data-delete="${m.id}">${tr("delete")}</button></article>`).join(""):`<div class="empty-state">${tr("emptyMedia")}</div>`}
-function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-$("#mediaInput").addEventListener("change",async e=>{for(const f of e.target.files)await storeMedia(f);e.target.value="";renderMedia()});
-$("#mediaGrid").addEventListener("click",e=>{const b=e.target.closest("[data-delete]");if(!b)return;const tx=mediaDb.transaction("media","readwrite");tx.objectStore("media").delete(Number(b.dataset.delete));tx.oncomplete=renderMedia});
-$("#exportData").addEventListener("click",()=>{const blob=new Blob([JSON.stringify({profile:D.profile,experiences:D.experiences,projects:D.projects,credentials:D.credentials,skills:D.skills},null,2)],{type:"application/json"});download(blob,"leyuan-archive.json")});
-$("#importInput").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;const obj=JSON.parse(await f.text());download(new Blob([JSON.stringify(obj,null,2)],{type:"application/json"}),"imported-archive-preview.json");alert(lang==="zh"?"已校验 JSON 并下载备份。请将内容合并到 data.js 后重新部署。":"JSON validated and exported. Merge the content into data.js and redeploy.");e.target.value=""});
-function download(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}
+const D = window.SITE_DATA;
+const I18N = window.I18N;
+let lang = localStorage.getItem("ll_lang") || "zh";
+let activeFilter = "All", mediaDb;
+const $ = s => document.querySelector(s);
+
+const tr = k => (I18N[lang] && I18N[lang][k]) || k;
+
+function applyStaticI18n(){
+  document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = tr(el.dataset.i18n); });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => { el.placeholder = tr(el.dataset.i18nPlaceholder); });
+  $("#langToggle").textContent = lang === "zh" ? "EN" : "中文";
+}
+
+function renderExperiences(){
+  $("#experienceList").innerHTML = D.experiences.map(e => `
+    <article class="experience-card">
+      <div>
+        <div class="exp-date">${e.date}</div>
+        <div class="exp-company">${lang === "zh" ? e.company : e.companyEn}</div>
+        <div class="exp-role">${lang === "zh" ? e.role : e.roleEn}</div>
+      </div>
+      <div class="exp-content">
+        <h3>${lang === "zh" ? e.title : e.titleEn}</h3>
+        <ul>${e.bullets.map(b => `<li>${b[lang === "zh" ? 0 : 1]}</li>`).join("")}</ul>
+      </div>
+    </article>`).join("");
+}
+
+function renderProjects(){
+  const q = $("#searchInput").value.toLowerCase().trim();
+  const arr = D.projects.filter(p => {
+    const catOk = activeFilter === "All" ||
+      (activeFilter === "Data Science" ? p.category === "Data Science" : p.category === "Software");
+    return catOk && JSON.stringify(p).toLowerCase().includes(q);
+  });
+  $("#projectGrid").innerHTML = arr.map(p => `
+    <a class="project-card" href="project.html?id=${encodeURIComponent(p.id)}">
+      <div class="project-cover">
+        <span class="cover-placeholder">${p.category.toUpperCase()}</span>
+        ${p.cover ? `<img src="${p.cover}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}
+      </div>
+      <div class="project-top"><span>${p.category.toUpperCase()}</span><span>${p.date}</span></div>
+      <h3>${lang === "zh" ? p.title : p.enTitle}</h3>
+      <div class="project-sub">${lang === "zh" ? p.subtitle : p.enSubtitle}</div>
+      <p>${lang === "zh" ? p.intro : p.enIntro}</p>
+      <ul>${p.bullets.map(b => `<li>${b[lang === "zh" ? 0 : 1]}</li>`).join("")}</ul>
+      <div class="tech-list">${p.tech.map(t => `<span>${t}</span>`).join("")}</div>
+      <span class="card-cta">${tr("viewDetail")}</span>
+    </a>`).join("") || `<div class="empty-state">${tr("noProjects")}</div>`;
+}
+
+// 渲染证书（支持点击查看大图）
+function renderCredentials(){
+  $("#credentialGrid").innerHTML = D.credentials.map(c => {
+    const hasImg = c[4] && c[4].length > 0;
+    const content = `
+      <div class="cred-type">${c[3]}</div>
+      <h3>${lang === "zh" ? c[0] : c[1]}</h3>
+      <p>${lang === "zh" ? c[2] : c[2]}</p>
+      ${hasImg ? `<div class="cert-badge">点击查看证书 ↗</div>` : ""}
+    `;
+    return hasImg 
+      ? `<a href="${c[4]}" target="_blank" class="credential has-img">${content}</a>`
+      : `<article class="credential">${content}</article>`;
+  }).join("");
+}
+
+function renderSkills(){
+  $("#skillGrid").innerHTML = D.skills.map(s => `
+    <article class="skill-card"><h3>${lang === "zh" ? s[0] : s[1]}</h3><p>${lang === "zh" ? s[2] : s[3]}</p></article>`).join("");
+}
+
+function renderFilters(){
+  $("#filterButtons").innerHTML = [["All", tr("all")], ["Data Science", tr("data")], ["Software", tr("software")]]
+    .map(([v, l]) => `<button class="filter-btn ${activeFilter === v ? "active" : ""}" data-filter="${v}">${l}</button>`).join("");
+}
+
+function renderAll(){
+  renderExperiences(); renderProjects(); renderCredentials(); renderSkills(); renderFilters();
+  $("#phoneText").textContent = D.showPhone ? D.phone : (lang === "zh" ? "未公开（可通过邮箱联系）" : "Hidden — please contact by email");
+}
+
+function applyLang(){
+  applyStaticI18n();
+  renderAll();
+  renderMedia();
+  syncVaultUI();
+}
+
+/* ---------- 数字资产库密码锁 ---------- */
+const _vk = [76,108,121,54,54,54,49,49,48,51]; // Lly6661103 的字符码
+const VAULT_PASS = _vk.map(c => String.fromCharCode(c)).join("");
+let vaultUnlocked = sessionStorage.getItem("ll_vault") === "1";
+
+function syncVaultUI(){
+  const lock = $("#vaultLock"), ctl = $("#vaultControls");
+  if (lock) lock.hidden = vaultUnlocked;
+  if (ctl) ctl.hidden = !vaultUnlocked;
+}
+
+function tryUnlock(){
+  const val = $("#vaultPassword").value;
+  if (val === VAULT_PASS) {
+    vaultUnlocked = true;
+    sessionStorage.setItem("ll_vault", "1");
+    $("#vaultError").textContent = "";
+    $("#vaultPassword").value = "";
+    syncVaultUI();
+  } else {
+    $("#vaultError").textContent = tr("vaultWrong");
+    $("#vaultPassword").value = "";
+    $("#vaultPassword").focus();
+  }
+}
+
+$("#vaultUnlock").addEventListener("click", tryUnlock);
+$("#vaultPassword").addEventListener("keydown", e => { if (e.key === "Enter") tryUnlock(); });
+
+/* ---------- 事件绑定 ---------- */
+$("#langToggle").addEventListener("click", () => { lang = lang === "zh" ? "en" : "zh"; localStorage.setItem("ll_lang", lang); applyLang(); });
+$("#menuToggle").addEventListener("click", () => $("#nav").classList.toggle("open"));
+$("#nav").addEventListener("click", e => { if (e.target.tagName === "A") $("#nav").classList.remove("open"); });
+$("#searchInput").addEventListener("input", renderProjects);
+$("#filterButtons").addEventListener("click", e => {
+  const b = e.target.closest("button[data-filter]");
+  if (b) { activeFilter = b.dataset.filter; renderFilters(); renderProjects(); }
+});
+$("#copyEmail").addEventListener("click", async () => {
+  await navigator.clipboard.writeText(D.profile.email);
+  const btn = $("#copyEmail");
+  btn.textContent = tr("copyDone");
+  setTimeout(() => { btn.textContent = tr("copyEmail"); }, 1800);
+});
+
+/* ---------- IndexedDB ---------- */
+const req = indexedDB.open("LeyuanPersonalArchive", 1);
+req.onupgradeneeded = () => req.result.createObjectStore("media", { keyPath: "id", autoIncrement: true });
+req.onsuccess = () => { mediaDb = req.result; renderMedia(); };
+
+function storeMedia(file){
+  return new Promise((resolve, reject) => {
+    const tx = mediaDb.transaction("media", "readwrite");
+    tx.objectStore("media").add({ name: file.name, type: file.type, blob: file, added: new Date().toISOString() });
+    tx.oncomplete = resolve; tx.onerror = reject;
+  });
+}
+function getMedia(){
+  return new Promise(resolve => {
+    const r = mediaDb.transaction("media", "readonly").objectStore("media").getAll();
+    r.onsuccess = () => resolve(r.result || []);
+  });
+}
+async function renderMedia(){
+  if (!mediaDb) return;
+  const items = await getMedia();
+  $("#mediaGrid").innerHTML = items.length
+    ? items.map(m => `<article class="media-item" data-id="${m.id}">${
+        m.type.startsWith("image/") ? `<img src="${URL.createObjectURL(m.blob)}" alt="">`
+        : m.type.startsWith("video/") ? `<video src="${URL.createObjectURL(m.blob)}" controls></video>`
+        : `<div class="file-preview">PDF</div>`
+      }<p>${escapeHtml(m.name)}</p><button data-delete="${m.id}">${tr("delete")}</button></article>`).join("")
+    : `<div class="empty-state">${tr("emptyMedia")}</div>`;
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c])); }
+
+$("#mediaInput").addEventListener("change", async e => {
+  for (const f of e.target.files) await storeMedia(f);
+  e.target.value = ""; renderMedia();
+});
+$("#mediaGrid").addEventListener("click", e => {
+  const b = e.target.closest("[data-delete]");
+  if (!b) return;
+  const tx = mediaDb.transaction("media", "readwrite");
+  tx.objectStore("media").delete(Number(b.dataset.delete));
+  tx.oncomplete = renderMedia;
+});
+
+$("#exportData").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify({
+    profile: D.profile, experiences: D.experiences, projects: D.projects,
+    credentials: D.credentials, skills: D.skills
+  }, null, 2)], { type: "application/json" });
+  download(blob, "leyuan-archive.json");
+});
+$("#importInput").addEventListener("change", async e => {
+  const f = e.target.files[0]; if (!f) return;
+  const obj = JSON.parse(await f.text());
+  download(new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" }), "imported-archive-preview.json");
+  alert(lang === "zh" ? "已校验 JSON 并下载备份。" : "JSON validated and exported.");
+  e.target.value = "";
+});
+function download(blob, name){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = name; a.click();
+  URL.revokeObjectURL(a.href);
+}
+
 applyLang();

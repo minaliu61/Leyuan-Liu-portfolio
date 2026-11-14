@@ -30,8 +30,8 @@
         <div class="hero-copy">
           <div class="eyebrow"><span class="pulse"></span><span data-i18n="heroEyebrow">个人作品集 · 数字档案</span></div>
           <h1><span data-i18n="heroHello">你好，我是</span><br><em>刘乐媛</em><span class="latin"> / Leyuan Liu</span></h1>
-          <p class="hero-lead" data-i18n="heroLead">数据科学与大数据技术本科生，关注数据分析、数据建模与业务流程优化。</p>
-          <div class="hero-tags"><span>DATA ANALYTICS</span><span>BUSINESS INSIGHTS</span><span>SOFTWARE PROJECTS</span></div>
+          <p class="hero-lead" data-i18n="heroLead">数据科学与大数据技术本科生，关注数据分析、数据建模与供应链方向。</p>
+          <div class="hero-tags"><span>DATA ANALYTICS</span><span>SUPPLY CHAIN</span><span>SOFTWARE PROJECTS</span></div>
           <div class="hero-actions">
             <a class="btn primary" href="#projects" data-i18n="viewProjects">查看项目 <span>↗</span></a>
             <a class="btn secondary" href="#about" data-i18n="moreAbout">了解更多</a>
@@ -71,8 +71,7 @@
           <aside class="contact-card">
             <h3 data-i18n="contactTitle">联系信息</h3>
             <p><span>EMAIL</span><a href="mailto:minaliu561@gmail.com">minaliu561@gmail.com ↗</a></p>
-            <p><span>PHONE</span><b id="phoneText">+86 178 1728 1152</b></p>
-            <p class="privacy-note" data-i18n="privacyNote">公开部署前，建议确认是否展示手机号。可在 data.js 中关闭。</p>
+            <p><span>PHONE</span><b id="phoneText">(+86)17817281152</b></p>
             <button class="text-btn" id="copyEmail" data-i18n="copyEmail">复制邮箱 ↗</button>
           </aside>
         </div>
@@ -90,7 +89,7 @@
       </section>
 
       <section class="section" id="credentials">
-        <div class="section-head"><div><div class="kicker">04 / CREDENTIALS</div><h2 data-i18n="credentialsTitle">证书与荣誉</h2></div><p data-i18n="credentialsIntro">可继续上传证书扫描件、照片或相关证明。</p></div>
+        <div class="section-head"><div><div class="kicker">04 / CREDENTIALS</div><h2 data-i18n="credentialsTitle">证书与荣誉</h2></div><p data-i18n="credentialsIntro">可继续上传证书扫描件、照片或相关证明。点击可查看大图。</p></div>
         <div id="credentialGrid" class="credential-grid"></div>
       </section>
 
@@ -101,16 +100,32 @@
 
       <section class="section vault-section" id="vault">
         <div class="section-head"><div><div class="kicker">06 / DIGITAL VAULT</div><h2 data-i18n="vaultTitle">个人数字资产库</h2></div><p data-i18n="vaultIntro">添加证书、项目演示、照片与视频；文件保存在当前浏览器中。</p></div>
-        <div class="vault-notice"><b data-i18n="vaultNoticeTitle">存储说明</b><span data-i18n="vaultNotice">此版本为静态 GitHub Pages 网站。上传到此处的文件保存在当前浏览器 IndexedDB，不会自动同步到 GitHub 或其他设备。若要公开展示，请将精选媒体放入仓库 assets 文件夹后再部署。</span></div>
-        <div class="vault-controls">
+
+        <div class="vault-lock" id="vaultLock">
+          <span class="lock-icon" aria-hidden="true">🔒</span>
+          <span class="lock-text" data-i18n="vaultLocked">为了保护隐私，此处已锁定。请输入管理员密码。</span>
+          <div class="lock-form">
+            <input id="vaultPassword" type="password" autocomplete="off" data-i18n-placeholder="vaultPasswordPlaceholder" placeholder="请输入管理员密码">
+            <button type="button" id="vaultUnlock" data-i18n="vaultUnlock">解锁</button>
+          </div>
+          <p class="lock-error" id="vaultError"></p>
+        </div>
+
+        <div class="vault-controls" id="vaultControls" hidden>
           <label class="upload-btn">＋ <span data-i18n="addMedia">添加照片 / 视频 / 文件</span><input id="mediaInput" type="file" accept="image/*,video/*,.pdf" multiple hidden></label>
           <button class="btn secondary small" id="exportData" data-i18n="exportData">导出档案 JSON</button>
-          <label class="btn secondary small import-btn" data-i18n="importData">导入档案 JSON<input id="importInput" type="file" accept="application/json" hidden></label>
+          <label class="btn secondary small import-btn"><span data-i18n="importData">导入档案 JSON</span><input id="importInput" type="file" accept="application/json" hidden></label>
         </div>
+
         <div id="mediaGrid" class="media-grid"><div class="empty-state" data-i18n="emptyMedia">还没有上传媒体文件。</div></div>
       </section>
     </main>
-    <footer><div class="footer-brand">LEYUAN LIU<span>PERSONAL PORTFOLIO & DIGITAL ARCHIVE</span></div><div data-i18n="footerText">持续更新 · 保持好奇 · 用数据解决问题</div><a href="#home">BACK TO TOP ↑</a></footer>
+
+    <footer>
+      <div class="footer-brand">LEYUAN LIU<span>PERSONAL PORTFOLIO & DIGITAL ARCHIVE</span></div>
+      <div data-i18n="footerText">持续更新 · 保持好奇 · 用数据解决问题</div>
+      <a href="#home">BACK TO TOP ↑</a>
+    </footer>
   </div>
   <script src="data.js"></script>
   <script src="app.js"></script>

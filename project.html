@@ -82,6 +82,7 @@
       // 照片与视频画廊（优先展示视频，再展示图片）
       let mediaHtml = "";
       if (p.video) {
+        const posterAttr = p.videoCover ? `poster="${p.videoCover}"` : "";
         mediaHtml += `<figure class="gallery-item" style="grid-column: 1 / -1;"><video src="${p.video}" controls preload="metadata" style="height: 400px; object-fit: contain; background: #000;"></video><figcaption>Demo Video</figcaption></figure>`;
       }
       if ((p.gallery || []).length) {

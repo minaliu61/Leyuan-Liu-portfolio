@@ -65,7 +65,7 @@ window.SITE_DATA = {
       subtitle:"算法实现", enSubtitle:"Algorithm Implementation",
       intro:"基于 MovieLens 数据集（约 <b>2,000 万条</b>评分记录、<b>2.7 万部</b>电影），针对用户兴趣差异明显的问题，开展用户行为分析与个性化推荐策略研究。",
       enIntro:"Analyzed user behavior and personalized strategies using the MovieLens dataset (approx. <b>20 million</b> ratings, <b>27,000</b> films) to address distinct user interest variations.",
-      cover:"", video:"", gallery:[], docs:[],
+      cover:"assets/projects/project-usedcar-cover.jpg", video:"",
       outcomes:[
         ["2,000 万条","20M","评分记录","Ratings"],
         ["2.7 万部","27,000","电影数量","Films"],
@@ -88,7 +88,7 @@ window.SITE_DATA = {
       subtitle:"Java 全栈开发项目｜项目负责人", enSubtitle:"Java Full-stack Development Project | Team Lead",
       intro:"针对即时电商交易中用户、商家及骑手之间业务衔接复杂的问题，负责项目整体业务流程梳理与系统架构设计，明确不同角色业务需求及系统功能。",
       enIntro:"Mapped complex workflows among customers, merchants and couriers, taking charge of overall business process mapping and system architecture design for an instant-commerce platform.",
-      cover:"", video:"", gallery:[], docs:[],
+      cover:"", video:"assets/projects/project-ecommerce-video.mp4",
       outcomes:[
         ["4 大模块","4 modules","履约 / 评价 / 仲裁 / 结算","Fulfillment / Reviews / Arbitration / Settlement"],
         ["完整交付","Complete delivery","PRD + 系统设计图 + 演示视频","PRD + Diagrams + Demo video"]

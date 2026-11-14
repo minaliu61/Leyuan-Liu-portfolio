@@ -80,7 +80,6 @@ function renderAll(){
   $("#phoneText").textContent = D.showPhone ? D.phone : (lang === "zh" ? "未公开（可通过邮箱联系）" : "Hidden — please contact by email");
 }
 
-// 事件监听
 $("#langToggle").addEventListener("click", () => { 
   lang = lang === "zh" ? "en" : "zh"; 
   localStorage.setItem("ll_lang", lang); 
@@ -100,6 +99,5 @@ $("#copyEmail").addEventListener("click", async () => {
   setTimeout(() => { btn.textContent = tr("copyEmail"); }, 1800);
 });
 
-// 初始化
 applyStaticI18n();
 renderAll();

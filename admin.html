@@ -29,7 +29,10 @@
   </div>
   
   <script>
-    if (sessionStorage.getItem('mina_admin') !== 'true') { window.location.href = 'index.html'; }
+    // 拦截非授权访问
+    if (sessionStorage.getItem('mina_admin') !== 'true') {
+      window.location.href = 'index.html';
+    }
     
     let mediaDb;
     const req = indexedDB.open("LeyuanPersonalArchive", 1);

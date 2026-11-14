@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard | Mina</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="admin.html"><span class="brand-mark">M</span><span>Mina's Workspace<span class="brand-sub">ADMIN ONLY</span></span></a>
+      <div class="top-actions">
+        <a href="index.html" class="btn secondary small" style="text-decoration:none;">退出后台</a>
+      </div>
+    </header>
+    <main class="section vault-section" style="min-height: 80vh;">
+      <div class="section-head">
+        <div><div class="kicker">ADMIN PANEL</div><h2>数字资产管理</h2></div>
+        <p>这里上传的文件仅保存在当前浏览器 IndexedDB 中，用于本地预览和整理。</p>
+      </div>
+      
+      <div class="vault-controls" style="margin-top: 30px;">
+        <label class="upload-btn" style="font-size:16px; padding:14px 20px;">＋ <span>上传本地文件</span><input id="mediaInput" type="file" accept="image/*,video/*,.pdf" multiple hidden></label>
+      </div>
+      <div id="mediaGrid" class="media-grid" style="margin-top: 30px;"><div class="empty-state">暂无本地预览文件</div></div>
+    </main>
+  </div>
+  
+  <script>
+    // 拦截非授权访问
+    if (sessionStorage.getItem('mina_admin') !== 'true') {
+      window.location.href = 'index.html';
+    }
+    
+    // 简易的上传逻辑
+    let mediaDb;
+    const req = indexedDB.open("LeyuanPersonalArchive", 1);
+    req.onupgradeneeded = () => req.result.createObjectStore("media", { keyPath: "id", autoIncrement: true });
+    req.onsuccess = () => { mediaDb = req.result; renderMedia(); };
+    
+    function storeMedia(file){
+      return new Promise((resolve, reject) => {
+        const tx = mediaDb.transaction("media", "readwrite");
+        tx.objectStore("media").add({ name: file.name, type: file.type, blob: file });
+        tx.oncomplete = resolve; tx.onerror = reject;
+      });
+    }
+    function getMedia(){
+      return new Promise(resolve => {
+        const r = mediaDb.transaction("media", "readonly").objectStore("media").getAll();
+        r.onsuccess = () => resolve(r.result || []);
+      });
+    }
+    async function renderMedia(){
+      if(!mediaDb) return;
+      const items = await getMedia();
+      document.getElementById("mediaGrid").innerHTML = items.length
+        ? items.map(m => `<article class="media-item">${m.type.startsWith("image/") ? `<img src="${URL.createObjectURL(m.blob)}">` : m.type.startsWith("video/") ? `<video src="${URL.createObjectURL(m.blob)}" controls></video>` : `<div class="file-preview">PDF</div>`}<p>${m.name}</p><button onclick="delMedia(${m.id})" style="color:#b0413e;border:none;background:none;cursor:pointer;">删除</button></article>`).join("")
+        : `<div class="empty-state">暂无本地预览文件</div>`;
+    }
+    document.getElementById("mediaInput").addEventListener("change", async e => {
+      for (const f of e.target.files) await storeMedia(f);
+      e.target.value = ""; renderMedia();
+    });
+    window.delMedia = (id) => {
+      const tx = mediaDb.transaction("media", "readwrite");
+      tx.objectStore("media").delete(id);
+      tx.oncomplete = renderMedia;
+    };
+  </script>
+</body>
+</html>

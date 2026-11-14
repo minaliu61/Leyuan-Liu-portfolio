@@ -164,7 +164,7 @@ zh:{
   skillsTitle:"专业技能",skillsIntro:"围绕数据处理、业务分析与应用开发形成的实践能力。",
   footerText:"持续更新 · 保持好奇 · 用数据解决问题",
   all:"全部",data:"数据分析",software:"软件开发",delete:"删除",
-  noProjects:"没有匹配的项目。",viewDetail:"查看详情 ↗",
+  noProjects:"没有匹配的项目。",viewDetail:"查看详情 ",
   backToProjects:"返回项目列表",detailGallery:"项目照片与演示",detailOutcomes:"项目成果",
   detailDocs:"技术文档",detailProcess:"项目说明",
   galleryEmpty:"暂未上传照片或视频。",docsEmpty:"暂未上传技术文档。",notFound:"未找到该项目。"

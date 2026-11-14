@@ -188,7 +188,7 @@ en:{
   skillsTitle:"Skills",skillsIntro:"Practical capabilities across data processing, business analysis and application development.",
   footerText:"Keep learning · Stay curious · Solve problems with data",
   all:"All",data:"Data Science",software:"Software",delete:"Delete",
-  noProjects:"No matching projects.",viewDetail:"View details ↗",
+  noProjects:"No matching projects.",viewDetail:"View details ",
   backToProjects:"Back to projects",detailGallery:"Photos & Demos",detailOutcomes:"Key Outcomes",
   detailDocs:"Technical Documents",detailProcess:"Project Details",
   galleryEmpty:"No photos or videos uploaded yet.",docsEmpty:"No documents uploaded yet.",notFound:"Project not found."

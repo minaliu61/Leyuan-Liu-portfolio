@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>刘乐媛 | Leyuan Liu — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="portfolio.html"><span class="brand-mark">LL</span><span>LEYUAN LIU<span class="brand-sub">PERSONAL ARCHIVE</span></span></a>
+      <nav id="nav">
+        <a href="#about" data-i18n="navAbout">关于</a><a href="#experience" data-i18n="navExperience">经历</a>
+        <a href="#projects" data-i18n="navProjects">项目</a><a href="#credentials" data-i18n="navCredentials">证书与荣誉</a>
+        <a href="#skills" data-i18n="navSkills">技能</a>
+      </nav>
+      <div class="top-actions">
+        <button class="lang-btn" id="langToggle">EN</button>
+        <button class="menu-btn" id="menuToggle">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- 保留原有的 Hero, Metrics, About, Experience, Projects, Credentials, Skills 结构 -->
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse"></span><span data-i18n="heroEyebrow">个人作品集 · 数字档案</span></div>
+          <h1><span data-i18n="heroHello">你好，我是</span><br><em>刘乐媛</em><span class="latin"> / Leyuan Liu</span></h1>
+          <p class="hero-lead" data-i18n="heroLead">数据科学与大数据技术本科生，关注数据分析、数据建模与供应链方向。</p>
+          <div class="hero-tags"><span>DATA ANALYTICS</span><span>SUPPLY CHAIN</span><span>SOFTWARE PROJECTS</span></div>
+          <div class="hero-actions">
+            <a class="btn primary" href="#projects" data-i18n="viewProjects">查看项目 <span>↗</span></a>
+            <a class="btn secondary" href="#about" data-i18n="moreAbout">了解更多</a>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="panel-top"><span data-i18n="profileCard">个人档案</span><span class="live-dot">●</span></div>
+          <div class="monogram">LL</div>
+          <div class="panel-name">Leyuan Liu</div>
+          <div class="panel-role" data-i18n="studentRole">数据科学与大数据技术 · 本科生</div>
+          <div class="panel-divider"></div>
+          <div class="panel-meta"><span data-i18n="locationLabel">学校</span><b data-i18n="schoolShort">广东金融学院</b></div>
+          <div class="panel-meta"><span data-i18n="gradLabel">预计毕业</span><b>2027.06</b></div>
+          <div class="panel-meta"><span data-i18n="emailLabel">邮箱</span><b>minaliu561@gmail.com</b></div>
+          <div class="panel-foot"><span>PORTFOLIO / 2026</span><span>01 — 06</span></div>
+        </div>
+        <div class="hero-index">01 <span>—</span> 06</div>
+      </section>
+
+      <section class="metrics">
+        <div><strong>50%</strong><span data-i18n="metric1">ETA 报表制作时间缩短</span></div>
+        <div><strong>17K+</strong><span data-i18n="metric2">每周运价查询处理量</span></div>
+        <div><strong>0.9687</strong><span data-i18n="metric3">XGBoost 项目 R²</span></div>
+        <div><strong>3+</strong><span data-i18n="metric4">数据与开发项目</span></div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="section-head"><div><div class="kicker">01 / ABOUT</div><h2 data-i18n="aboutTitle">关于我</h2></div><p data-i18n="aboutIntro">将数据能力与业务理解结合，关注可落地的问题解决方案。</p></div>
+        <div class="about-grid">
+          <article class="about-main">
+            <h3 data-i18n="educationTitle">教育背景</h3>
+            <div class="timeline-item">
+              <div class="timeline-date">2023.09 — 2027.06</div>
+              <div><h4 data-i18n="university">广东金融学院</h4><p data-i18n="major">数据科学与大数据技术 · 本科</p><p class="muted" data-i18n="courses">主修课程：数据分析、数据建模、数据可视化、Python 程序设计项目课程、Java 程序设计项目课程等。</p></div>
+            </div>
+          </article>
+          <aside class="contact-card">
+            <h3 data-i18n="contactTitle">联系信息</h3>
+            <p><span>EMAIL</span><a href="mailto:minaliu561@gmail.com">minaliu561@gmail.com ↗</a></p>
+            <p><span>PHONE</span><b id="phoneText">(+86)17817281152</b></p>
+            <button class="text-btn" id="copyEmail" data-i18n="copyEmail">复制邮箱 ↗</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="section-head"><div><div class="kicker">02 / EXPERIENCE</div><h2 data-i18n="experienceTitle">实习与实践经历</h2></div><p data-i18n="experienceIntro">流程优化、数据运营与现场服务。</p></div>
+        <div id="experienceList" class="stack-list"></div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-head"><div><div class="kicker">03 / SELECTED WORK</div><h2 data-i18n="projectsTitle">项目经历</h2></div><p data-i18n="projectsIntro">从数据探索、模型评估到业务系统设计。</p></div>
+        <div class="filter-row"><input id="searchInput" type="search" data-i18n-placeholder="searchPlaceholder" placeholder="搜索项目、技术栈或关键词…"><div id="filterButtons" class="filters"></div></div>
+        <div id="projectGrid" class="project-grid"></div>
+      </section>
+
+      <section class="section" id="credentials">
+        <div class="section-head"><div><div class="kicker">04 / CREDENTIALS</div><h2 data-i18n="credentialsTitle">证书与荣誉</h2></div><p data-i18n="credentialsIntro">点击查看证书扫描件。</p></div>
+        <div id="credentialGrid" class="credential-grid"></div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="section-head"><div><div class="kicker">05 / CAPABILITIES</div><h2 data-i18n="skillsTitle">专业技能</h2></div><p data-i18n="skillsIntro">围绕数据处理、业务分析与应用开发形成的实践能力。</p></div>
+        <div id="skillGrid" class="skill-grid"></div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-brand">LEYUAN LIU<span>PERSONAL PORTFOLIO & DIGITAL ARCHIVE</span></div>
+      <div data-i18n="footerText">持续更新 · 保持好奇 · 用数据解决问题</div>
+      <a href="#" onclick="window.location.reload()">BACK TO TOP ↑</a>
+    </footer>
+  </div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

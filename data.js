@@ -69,7 +69,7 @@ window.SITE_DATA = {
       subtitle:"算法实现", enSubtitle:"Algorithm Implementation",
       intro:"基于 MovieLens 数据集（约 <b>2,000 万条</b>评分记录、<b>2.7 万部</b>电影），针对用户兴趣差异明显的问题，开展用户行为分析与个性化推荐策略研究。",
       enIntro:"Analyzed user behavior and personalized strategies using the MovieLens dataset (approx. <b>20 million</b> ratings, <b>27,000</b> films) to address distinct user interest variations.",
-      cover:"assets/projects/project-movies-cover.jpg", 
+      cover:"assets/projects/project-movies-result.jpg", 
       video:"", 
       gallery:[
         {type:"image", src:"assets/projects/project-movies-result.jpg", zh:"Top-5 个性化推荐结果输出", en:"Top-5 Personalized Recommendations"}

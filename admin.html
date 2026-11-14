@@ -18,7 +18,7 @@
     <main class="section vault-section" style="min-height: 80vh;">
       <div class="section-head">
         <div><div class="kicker">ADMIN PANEL</div><h2>数字资产管理</h2></div>
-        <p>这里上传的文件仅保存在当前浏览器 IndexedDB 中，用于本地预览和整理。</p>
+        <p>这里上传的文件仅保存在当前浏览器 IndexedDB 中，用于本地预览和整理。HR 看不到这里。</p>
       </div>
       
       <div class="vault-controls" style="margin-top: 30px;">
@@ -29,12 +29,8 @@
   </div>
   
   <script>
-    // 拦截非授权访问
-    if (sessionStorage.getItem('mina_admin') !== 'true') {
-      window.location.href = 'index.html';
-    }
+    if (sessionStorage.getItem('mina_admin') !== 'true') { window.location.href = 'index.html'; }
     
-    // 简易的上传逻辑
     let mediaDb;
     const req = indexedDB.open("LeyuanPersonalArchive", 1);
     req.onupgradeneeded = () => req.result.createObjectStore("media", { keyPath: "id", autoIncrement: true });
